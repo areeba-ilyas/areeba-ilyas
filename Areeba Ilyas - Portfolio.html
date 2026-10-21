@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Areeba Ilyas | Machine Learning & AI Engineer</title>
+<meta name="description" content="Areeba Ilyas - Machine Learning Engineer and AI Specialist. LLMs, RAG, agentic AI, deep learning and Python.">
+<style>
+  :root {
+    --bg: #0b1020;
+    --bg-2: #111a33;
+    --surface: rgba(255,255,255,0.04);
+    --surface-2: rgba(255,255,255,0.07);
+    --border: rgba(255,255,255,0.10);
+    --text: #e6ebf5;
+    --muted: #9aa6c2;
+    --accent: #5eead4;
+    --accent-2: #818cf8;
+    --accent-3: #f472b6;
+    --radius: 16px;
+    --shadow: 0 10px 40px rgba(0,0,0,0.35);
+    --ease: cubic-bezier(.2,.7,.2,1);
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f6f8fc; --bg-2: #eaf0fb; --surface: rgba(255,255,255,0.8); --surface-2: #ffffff;
+      --border: rgba(15,23,42,0.10); --text: #0f172a; --muted: #475569; --shadow: 0 10px 30px rgba(15,23,42,0.08);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.65; overflow-x: hidden;
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  a { color: var(--accent); text-decoration: none; transition: color .25s var(--ease); }
+  a:hover { color: var(--accent-2); }
+  img { max-width: 100%; }
+  .container { width: min(1100px, 92%); margin: 0 auto; }
+  section { padding: 96px 0; position: relative; }
+
+  /* Animated background */
+  .bg-orbs { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+  .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .35; animation: float 18s ease-in-out infinite; }
+  .orb.a { width: 420px; height: 420px; background: var(--accent); top: -120px; left: -100px; }
+  .orb.b { width: 380px; height: 380px; background: var(--accent-2); top: 30%; right: -120px; animation-delay: -6s; }
+  .orb.c { width: 300px; height: 300px; background: var(--accent-3); bottom: -100px; left: 30%; animation-delay: -12s; opacity: .2; }
+  @keyframes float {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(40px,-30px) scale(1.08); }
+    66% { transform: translate(-30px,40px) scale(.95); }
+  }
+
+  /* Navigation */
+  nav {
+    position: fixed; top: env(safe-area-inset-top, 0px); left: 0; right: 0; z-index: 50;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    background: color-mix(in srgb, var(--bg) 70%, transparent);
+    border-bottom: 1px solid var(--border);
+    transition: transform .4s var(--ease);
+  }
+  .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 68px; }
+  .logo { font-weight: 800; letter-spacing: .5px; color: var(--text); font-size: 1.1rem; }
+  .logo span { background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { color: var(--muted); font-size: .95rem; position: relative; padding: 4px 0; }
+  .nav-links a::after {
+    content: ""; position: absolute; left: 0; bottom: -2px; height: 2px; width: 0;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width .35s var(--ease);
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+  .menu-btn { display: none; background: none; border: 1px solid var(--border); color: var(--text); padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+
+  /* Hero */
+  .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 100px; }
+  .eyebrow {
+    display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: .85rem; color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    animation: fadeUp .8s var(--ease) both;
+  }
+  .hero h1 { font-size: clamp(2.6rem, 6vw, 4.4rem); font-weight: 800; line-height: 1.1; margin: 20px 0 14px; animation: fadeUp .9s .1s var(--ease) both; }
+  .gradient-text {
+    background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
+    background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: gradientShift 7s linear infinite;
+  }
+  @keyframes gradientShift { 0% { background-position: 0% 50%; } 100% { background-position: 300% 50%; } }
+  .typing { color: var(--muted); font-size: clamp(1.05rem, 2.2vw, 1.3rem); min-height: 2em; animation: fadeUp .9s .2s var(--ease) both; }
+  .caret { display: inline-block; width: 2px; height: 1.1em; background: var(--accent); margin-left: 4px; vertical-align: text-bottom; animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .hero p.lead { max-width: 640px; color: var(--muted); margin: 18px 0 32px; animation: fadeUp .9s .3s var(--ease) both; }
+  .cta { display: flex; gap: 14px; flex-wrap: wrap; animation: fadeUp .9s .4s var(--ease) both; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; border-radius: 12px; font-weight: 600;
+    border: 1px solid transparent; transition: transform .3s var(--ease), box-shadow .3s var(--ease), background .3s var(--ease);
+    cursor: pointer; font-size: .98rem;
+  }
+  .btn-primary { background: linear-gradient(90deg, var(--accent), var(--accent-2)); color: #06121f; box-shadow: 0 8px 26px rgba(94,234,212,.25); }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(129,140,248,.35); color: #06121f; }
+  .btn-ghost { border-color: var(--border); color: var(--text); background: var(--surface); }
+  .btn-ghost:hover { transform: translateY(-3px); border-color: var(--accent); color: var(--text); }
+  .scroll-hint { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); color: var(--muted); font-size: .8rem; letter-spacing: 2px; text-transform: uppercase; animation: bob 2.2s ease-in-out infinite; }
+  @keyframes bob { 0%,100% { transform: translate(-50%,0); } 50% { transform: translate(-50%,8px); } }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+
+  /* Section headings */
+  .section-title { font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 800; margin-bottom: 10px; }
+  .section-sub { color: var(--muted); margin-bottom: 48px; max-width: 620px; }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal.d1 { transition-delay: .1s; } .reveal.d2 { transition-delay: .2s; } .reveal.d3 { transition-delay: .3s; }
+
+  /* About */
+  .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: start; }
+  .about-text p { color: var(--muted); margin-bottom: 16px; font-size: 1.02rem; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .stat {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; text-align: center;
+    transition: transform .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease);
+  }
+  .stat:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: var(--shadow); }
+  .stat .num { font-size: 2rem; font-weight: 800; background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .stat .label { color: var(--muted); font-size: .88rem; }
+
+  /* Skills */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .skill-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px;
+    transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+  }
+  .skill-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: var(--accent-2); }
+  .skill-card h3 { font-size: 1.05rem; margin-bottom: 14px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-size: .8rem; padding: 5px 11px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border);
+    color: var(--muted); transition: all .25s var(--ease);
+  }
+  .chip:hover { color: var(--text); border-color: var(--accent); transform: scale(1.06); }
+
+  /* Experience timeline */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before { content: ""; position: absolute; left: 6px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(var(--accent), var(--accent-2)); }
+  .tl-item { position: relative; margin-bottom: 36px; }
+  .tl-item::before {
+    content: ""; position: absolute; left: -28px; top: 8px; width: 14px; height: 14px; border-radius: 50%;
+    background: var(--bg); border: 3px solid var(--accent); box-shadow: 0 0 0 0 rgba(94,234,212,.5); animation: pulse 2.4s infinite;
+  }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(94,234,212,.5); } 70% { box-shadow: 0 0 0 12px rgba(94,234,212,0); } 100% { box-shadow: 0 0 0 0 rgba(94,234,212,0); } }
+  .tl-item h3 { font-size: 1.15rem; }
+  .tl-meta { color: var(--accent-2); font-size: .9rem; margin-bottom: 8px; }
+  .tl-item ul { list-style: none; color: var(--muted); }
+  .tl-item li { padding-left: 18px; position: relative; margin-bottom: 6px; }
+  .tl-item li::before { content: "▹"; position: absolute; left: 0; color: var(--accent); }
+
+  /* Projects */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .project {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column;
+    transition: transform .4s var(--ease), box-shadow .4s var(--ease), border-color .4s var(--ease); position: relative; overflow: hidden;
+  }
+  .project::before {
+    content: ""; position: absolute; inset: 0; opacity: 0; transition: opacity .4s var(--ease);
+    background: radial-gradient(600px circle at var(--mx,50%) var(--my,0%), rgba(94,234,212,.12), transparent 40%);
+  }
+  .project:hover { transform: translateY(-8px); box-shadow: var(--shadow); border-color: var(--accent); }
+  .project:hover::before { opacity: 1; }
+  .project-tag { font-size: .78rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); margin-bottom: 10px; }
+  .project h3 { font-size: 1.2rem; margin-bottom: 10px; }
+  .project p { color: var(--muted); font-size: .95rem; margin-bottom: 18px; flex: 1; }
+  .project .chips { margin-bottom: 18px; }
+  .project .links a { font-weight: 600; font-size: .92rem; margin-right: 18px; }
+  .project .links a::after { content: " →"; transition: margin .3s var(--ease); }
+  .project .links a:hover::after { margin-left: 4px; }
+
+  /* Education & certs */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; transition: transform .35s var(--ease), border-color .35s var(--ease); }
+  .card:hover { transform: translateY(-4px); border-color: var(--accent-2); }
+  .card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+  .card p, .card li { color: var(--muted); font-size: .95rem; }
+  .card ul { list-style: none; }
+  .card li { margin-bottom: 8px; padding-left: 16px; position: relative; }
+  .card li::before { content: "•"; position: absolute; left: 0; color: var(--accent); }
+  .cert-count { font-size: 2.4rem; font-weight: 800; background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  /* Contact */
+  .contact-box {
+    text-align: center; padding: 56px 28px; border-radius: 24px; border: 1px solid var(--border);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, var(--surface)), color-mix(in srgb, var(--accent-2) 12%, var(--surface)));
+    box-shadow: var(--shadow);
+  }
+  .contact-box h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); margin-bottom: 12px; }
+  .contact-box > p { color: var(--muted); margin-bottom: 28px; }
+  .contact-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .contact-links .btn { min-width: 170px; justify-content: center; }
+  .contact-info { margin-top: 26px; color: var(--muted); font-size: .92rem; }
+
+  footer { padding: 30px 0; text-align: center; color: var(--muted); font-size: .88rem; border-top: 1px solid var(--border); }
+
+  /* Responsive */
+  @media (max-width: 860px) {
+    .about-grid, .two-col { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    section { padding: 72px 0; }
+    .menu-btn { display: block; }
+    .nav-links {
+      position: absolute; top: 68px; left: 0; right: 0; flex-direction: column; gap: 0;
+      background: var(--bg); border-bottom: 1px solid var(--border); max-height: 0; overflow: hidden; transition: max-height .45s var(--ease);
+    }
+    .nav-links.open { max-height: 400px; }
+    .nav-links li { padding: 14px 6%; border-top: 1px solid var(--border); }
+    .scroll-hint { display: none; }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-orbs" aria-hidden="true">
+  <div class="orb a"></div>
+  <div class="orb b"></div>
+  <div class="orb c"></div>
+</div>
+
+<nav>
+  <div class="container nav-inner">
+    <a href="#home" class="logo">Areeba<span>.AI</span></a>
+    <button class="menu-btn" aria-label="Toggle menu" id="menuBtn">Menu</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header id="home" class="hero">
+  <div class="container" style="position:relative;">
+    <span class="eyebrow">Available for remote opportunities</span>
+    <h1>Hi, I'm <span class="gradient-text">Areeba Ilyas</span></h1>
+    <div class="typing"><span id="typed"></span><span class="caret"></span></div>
+    <p class="lead">
+      Software Engineer and Machine Learning Engineer based in Rawalpindi, Pakistan. I build agentic AI systems, retrieval-augmented
+      generation pipelines and deep learning models, and turn them into working products.
+    </p>
+    <div class="cta">
+      <a class="btn btn-primary" href="#projects">View My Work</a>
+      <a class="btn btn-ghost" href="#contact">Get in Touch</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</header>
+
+<section id="about">
+  <div class="container about-grid">
+    <div class="about-text reveal">
+      <h2 class="section-title">About Me</h2>
+      <p>
+        I am a Software Engineering graduate from UET Taxila with over a year of professional experience in Machine Learning
+        and AI. My work focuses on autonomous AI agents, LLM-based workflows, and evaluating the quality of AI-generated outputs.
+      </p>
+      <p>
+        I enjoy taking an idea from prototype to production: designing the pipeline, writing clean Python and FastAPI services,
+        testing the results, and improving them step by step. I am comfortable working independently in remote teams.
+      </p>
+    </div>
+    <div class="stats reveal d2">
+      <div class="stat"><div class="num">1+</div><div class="label">Years Professional ML/AI</div></div>
+      <div class="stat"><div class="num">3</div><div class="label">ML Specialist Roles</div></div>
+      <div class="stat"><div class="num">LLMs</div><div class="label">Agents &amp; RAG</div></div>
+      <div class="stat"><div class="num">Python</div><div class="label">Primary Language</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <h2 class="section-title reveal">Skills &amp; Expertise</h2>
+    <p class="section-sub reveal">Tools and technologies I use to design, build and evaluate AI systems.</p>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <h3>LLMs &amp; Generative AI</h3>
+        <div class="chips">
+          <span class="chip">Agentic AI</span><span class="chip">LLM APIs</span><span class="chip">Prompt Engineering</span>
+          <span class="chip">RAG</span><span class="chip">Embeddings</span><span class="chip">Autonomous Agents</span>
+        </div>
+      </div>
+      <div class="skill-card reveal d1">
+        <h3>Machine Learning &amp; Deep Learning</h3>
+        <div class="chips">
+          <span class="chip">TensorFlow</span><span class="chip">PyTorch</span><span class="chip">Keras</span>
+          <span class="chip">scikit-learn</span><span class="chip">Neural Networks</span><span class="chip">Computer Vision</span>
+        </div>
+      </div>
+      <div class="skill-card reveal d2">
+        <h3>NLP &amp; Data</h3>
+        <div class="chips">
+          <span class="chip">Text Classification</span><span class="chip">Sentiment Analysis</span><span class="chip">Pandas</span>
+          <span class="chip">NumPy</span><span class="chip">Data Analysis</span><span class="chip">Chatbots</span>
+        </div>
+      </div>
+      <div class="skill-card reveal d3">
+        <h3>Backend &amp; Tools</h3>
+        <div class="chips">
+          <span class="chip">Python (Expert)</span><span class="chip">FastAPI</span><span class="chip">LangChain</span>
+          <span class="chip">Git &amp; GitHub</span><span class="chip">REST APIs</span><span class="chip">Streamlit</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <h2 class="section-title reveal">Experience</h2>
+    <p class="section-sub reveal">Where I have applied my work in real projects.</p>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <h3>Machine Learning Specialist</h3>
+        <div class="tl-meta">Arch Technologies, FutureXcel, HireBridge &middot; Aug 2025 &ndash; Present</div>
+        <ul>
+          <li>Designed and implemented autonomous AI systems for complex multi-step workflow execution.</li>
+          <li>Evaluated AI-generated outputs for accuracy, errors and improvement opportunities.</li>
+          <li>Optimized prompt engineering strategies for autonomous agent performance.</li>
+        </ul>
+      </div>
+      <div class="tl-item reveal">
+        <h3>Data Analyst</h3>
+        <div class="tl-meta">Leverify &middot; Jul 2024 &ndash; Aug 2024</div>
+        <ul>
+          <li>Analyzed datasets using AI-assisted tools and evaluated AI-generated insights.</li>
+          <li>Documented technical automation processes and best practices.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <h2 class="section-title reveal">Featured Projects</h2>
+    <p class="section-sub reveal">A selection of AI and machine learning work.</p>
+    <div class="projects-grid">
+      <article class="project reveal">
+        <div class="project-tag">Final Year Project</div>
+        <h3>Sentra AI: Agentic Task Management</h3>
+        <p>An autonomous agentic AI system where users give instructions in natural language and AI agents execute multi-step tasks. Includes NLP-based task delegation and structured JSON responses.</p>
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">NLP</span><span class="chip">LLM APIs</span><span class="chip">Ollama</span>
+        </div>
+        <div class="links"><a href="https://github.com/areeba-ilyas" target="_blank" rel="noopener">View on GitHub</a></div>
+      </article>
+      <article class="project reveal d1">
+        <div class="project-tag">Retrieval-Augmented Generation</div>
+        <h3>Enterprise RAG &amp; Knowledge Retrieval</h3>
+        <p>A retrieval pipeline with vector embeddings and semantic search over document collections, combined with a knowledge graph layer to ground LLM answers in source data.</p>
+        <div class="chips">
+          <span class="chip">LangChain</span><span class="chip">Pinecone</span><span class="chip">Neo4j</span><span class="chip">Embeddings</span>
+        </div>
+        <div class="links"><a href="https://github.com/areeba-ilyas" target="_blank" rel="noopener">View on GitHub</a></div>
+      </article>
+      <article class="project reveal d2">
+        <div class="project-tag">Deep Learning</div>
+        <h3>Real-Time Anomaly Detection</h3>
+        <p>A deep learning based anomaly detection pipeline with streaming data ingestion and containerized deployment, built for high-throughput event data.</p>
+        <div class="chips">
+          <span class="chip">PyTorch</span><span class="chip">Kafka</span><span class="chip">Spark</span><span class="chip">FastAPI</span><span class="chip">Docker</span>
+        </div>
+        <div class="links"><a href="https://github.com/areeba-ilyas" target="_blank" rel="noopener">View on GitHub</a></div>
+      </article>
+      <article class="project reveal">
+        <div class="project-tag">Computer Vision</div>
+        <h3>Object Detection &amp; Edge Deployment</h3>
+        <p>Trained YOLOv8 object detection models and optimized them for edge devices through ONNX export and quantization.</p>
+        <div class="chips">
+          <span class="chip">YOLOv8</span><span class="chip">ONNX</span><span class="chip">PyTorch</span><span class="chip">OpenCV</span>
+        </div>
+        <div class="links"><a href="https://github.com/areeba-ilyas" target="_blank" rel="noopener">View on GitHub</a></div>
+      </article>
+      <article class="project reveal d1">
+        <div class="project-tag">Machine Learning</div>
+        <h3>Liver Cancer Detection</h3>
+        <p>A convolutional neural network for medical image analysis, built with TensorFlow to classify liver scans.</p>
+        <div class="chips">
+          <span class="chip">TensorFlow</span><span class="chip">CNN</span><span class="chip">Medical Imaging</span>
+        </div>
+        <div class="links"><a href="https://github.com/areeba-ilyas" target="_blank" rel="noopener">View on GitHub</a></div>
+      </article>
+      <article class="project reveal d2">
+        <div class="project-tag">Web Development</div>
+        <h3>Frontend Projects</h3>
+        <p>React applications including an e-commerce app, a Pickbazar-style storefront, and an AI code generator interface.</p>
+        <div class="chips">
+          <span class="chip">React</span><span class="chip">JavaScript</span><span class="chip">Tailwind CSS</span>
+        </div>
+        <div class="links"><a href="https://github.com/areeba-ilyas" target="_blank" rel="noopener">View on GitHub</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="container">
+    <h2 class="section-title reveal">Education &amp; Certifications</h2>
+    <p class="section-sub reveal">Academic background and continuous learning.</p>
+    <div class="two-col">
+      <div class="card reveal">
+        <h3>Bachelor's in Software Engineering</h3>
+        <p>University of Engineering and Technology (UET), Taxila &middot; Expected 2026</p>
+        <ul style="margin-top:14px;">
+          <li>F.Sc Pre-Engineering, Base College (2022)</li>
+          <li>Matriculation (Science), Sir Syed Schools (2020)</li>
+        </ul>
+      </div>
+      <div class="card reveal d1">
+        <div class="cert-count">Google</div>
+        <h3>Google Certifications</h3>
+        <p>Completed courses in Project Management, IT Automation with Python, Git &amp; GitHub, Cybersecurity, UX Design, Digital Marketing and more.</p>
+        <ul style="margin-top:14px;">
+          <li>Institute of Emerging Careers: JavaScript Async, DOM and Interactive Web Pages</li>
+          <li>Workforce Institute: Modern JavaScript (ES6 and Beyond)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-box reveal">
+      <h2>Let's Build Something Together</h2>
+      <p>I am open to remote roles, contract work and collaborations in AI, machine learning and LLM engineering.</p>
+      <div class="contact-links">
+        <a class="btn btn-primary" href="mailto:areebakhan2k22@gmail.com">Email Me</a>
+        <a class="btn btn-ghost" href="https://github.com/areeba-ilyas" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/engr-areeba-ilyas-778314258/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="contact-info">Rawalpindi, Pakistan &middot; +92 318 0835047 &middot; areebakhan2k22@gmail.com</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">&copy; <span id="year"></span> Areeba Ilyas. Built with care.</div>
+</footer>
+
+<script>
+  // Typing effect
+  const phrases = ["Machine Learning Engineer", "AI Agent Builder", "RAG & LLM Developer", "Python Developer"];
+  const typed = document.getElementById("typed");
+  let p = 0, c = 0, deleting = false;
+  function type() {
+    const word = phrases[p];
+    typed.textContent = deleting ? word.substring(0, c--) : word.substring(0, c++);
+    let delay = deleting ? 45 : 90;
+    if (!deleting && c === word.length + 1) { delay = 1600; deleting = true; c = word.length; }
+    else if (deleting && c < 0) { deleting = false; c = 0; p = (p + 1) % phrases.length; delay = 300; }
+    setTimeout(type, delay);
+  }
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) type();
+  else typed.textContent = phrases[0];
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+  // Active nav link on scroll
+  const links = document.querySelectorAll(".nav-links a");
+  const sections = [...links].map(a => document.querySelector(a.getAttribute("href")));
+  window.addEventListener("scroll", () => {
+    let current = "";
+    sections.forEach(s => { if (s && window.scrollY >= s.offsetTop - 200) current = "#" + s.id; });
+    links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === current));
+  }, { passive: true });
+
+  // Mobile menu
+  const menuBtn = document.getElementById("menuBtn");
+  const navLinks = document.getElementById("navLinks");
+  menuBtn.addEventListener("click", () => navLinks.classList.toggle("open"));
+  links.forEach(a => a.addEventListener("click", () => navLinks.classList.remove("open")));
+
+  // Spotlight effect on project cards
+  document.querySelectorAll(".project").forEach(card => {
+    card.addEventListener("mousemove", e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty("--mx", (e.clientX - r.left) + "px");
+      card.style.setProperty("--my", (e.clientY - r.top) + "px");
+    });
+  });
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
